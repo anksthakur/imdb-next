@@ -38,16 +38,16 @@ const Navbar: React.FC = () => {
               <FaBars color="white" fontSize="1.5em" />
               <span className='text-cyan-50 pl-2'>Menu</span>
             </div>
-            <div className='flex justify-center'>
-              <select className='w-10'>
+            <div className='flex justify-center rounded border border-red-200'>
+              <select className='w-10 outline-none'>
                 <option>All</option>
                 <option>TV Episodes</option>
                 <option>Celebs</option>
                 <option>Companies</option>
               </select>
-              <input className="w-96" type='search' placeholder='search IMDb' />
-              <span>
-                <CiSearch color="white" fontSize="1.5em" />
+              <input className="w-96 outline-none" type='search' placeholder='search IMDb' />
+              <span className='bg-white '>
+                <CiSearch color="black" fontSize="1.5em" />
               </span>
             </div>
             <div>
@@ -105,8 +105,8 @@ const Navbar: React.FC = () => {
                   Movies
                 </h1>
                 <h2>Release Calender</h2>
-                <h2>Top 250 Movies</h2>
-                <h2>Most Popular Movies</h2>
+                <Link href="/topmovies"><h2>Top 250 Movies</h2></Link>
+               <Link href="/popularmovies"><h2>Most Popular Movies</h2></Link>
                 <h2>Movies News</h2>
                 <h2>ShowTimes & Tickets</h2>
                 <h2>India Movie Spotlight</h2>
@@ -117,8 +117,8 @@ const Navbar: React.FC = () => {
                   TV Shows
                 </h1>
                 <h2>What is on TV & Streaming</h2>
-                <h2>Top 250 TV Shows</h2>
-                <h2>Most Popular TV Shows</h2>
+               <Link href="/topshows"> <h2>Top 250 TV Shows</h2></Link>
+               <Link href="/popularshows"> <h2>Most Popular TV Shows</h2></Link>
                 <h2>TV News</h2>
                 <h2>Browse TV Shows by Genre</h2>
               </div>
