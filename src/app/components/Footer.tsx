@@ -13,7 +13,9 @@ const Footer = () => {
     <>
       <div>
         <div className='wrapper'>
-            {/* absolute bottom-0 */}
+          <div className='flex justify-center'>
+            <Link href="/signin"><button className='bg-yellow-400 rounded-sm mb-5 font-bold px-6 py-2 '>Sign in for more access</button></Link>
+          </div>
         <div className='rounded border border-red-200 w-80 my-0 mx-auto'>
             <h1 className='text-white font-bold my-5 text-center'>Follow IMDb on social</h1>
             <div className='flex gap-5 mb-5 justify-center' >

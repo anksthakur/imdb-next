@@ -21,15 +21,15 @@ const Navbar: React.FC = () => {
 
   return (
     <>
-      <div className='bg-black'>
+      <div className='bg-black py-2'>
         <div className='wrapper'>
           <div className='flex justify-between items-center'>
             <div>
               <Link href="/">
                 <Image
                   src="/imdb.png"
-                  width={80}
-                  height={30}
+                  width={60}
+                  height={25}
                   alt="imdb image"
                 />
               </Link>
