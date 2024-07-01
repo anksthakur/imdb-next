@@ -16,6 +16,9 @@ const config: Config = {
       translate: {
         '-full': '-100%',
       },
+      height: {
+        '472px': '472px',
+      },
     },
   },
   plugins: [],
