@@ -7,6 +7,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { MdNavigateNext } from "react-icons/md";
 import Link from "next/link";
 import { IoPlayCircleOutline } from "react-icons/io5";
+import { CiBookmarkPlus } from "react-icons/ci";
 
 const API_KEY: string = process.env.NEXT_PUBLIC_API_KEY || "";
 
@@ -38,7 +39,7 @@ const Content1: React.FC = () => {
 
   return (
     <div className="wrapper">
-      <div className="flex gap-7">
+      <div className="flex gap-7 py-2">
         {isError && <p>{isError}</p>}
         {data.length > 0 && (
           <Carousel
@@ -57,7 +58,12 @@ const Content1: React.FC = () => {
                   height={700}
                 />
                 <div className="p-4 flex items-center absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-t from-black to-transparent w-full">
-                  <IoPlayCircleOutline color="white" fontSize="2.5em" />
+                  <Link href="/watchlist">
+                    <CiBookmarkPlus color="white" fontSize="2.5em" />
+                  </Link>
+                  <Link href="/">
+                    <IoPlayCircleOutline color="white" fontSize="2.5em" />
+                  </Link>
                   <h2 className="text-lg font-bold text-white ml-2">
                     {movie.title}
                   </h2>
@@ -66,6 +72,7 @@ const Content1: React.FC = () => {
             ))}
           </Carousel>
         )}
+        {/* Left side */}
         <div className="flex flex-col">
           {data.slice(0, 4).map((movie) => (
             <div key={movie.id} className="flex items-center gap-2 py-1">
@@ -76,6 +83,11 @@ const Content1: React.FC = () => {
                 height={100}
                 alt="IMDB Logo"
               />
+              {/* Play icon */}
+              <Link href="/">
+                <IoPlayCircleOutline color="white" fontSize="2.5em" />
+              </Link>
+
               <div className="text-white">{movie.title}</div>
             </div>
           ))}
