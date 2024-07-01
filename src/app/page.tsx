@@ -1,9 +1,12 @@
+import React from 'react'
+import Content1 from './components/Content1'
 
-
-export default function Home() {
+const page = () => {
   return (
     <>
-    
+      <Content1/>
     </>
-  );
+  )
 }
+
+export default page
