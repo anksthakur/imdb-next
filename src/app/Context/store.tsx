@@ -7,6 +7,7 @@ type DataType = {
   poster_path: string;
   vote_count:number;
   vote_average:number;
+  popularity:number;
 };
 
 interface ContextProps {

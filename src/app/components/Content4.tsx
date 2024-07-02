@@ -17,9 +17,10 @@ interface Movie {
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  popularity:number;
 }
 
-const Content3: React.FC = () => {
+const Content4: React.FC = () => {
   const { data, fetchMovies } = useGlobalContext();
   const { movie: globalMovies } = useGlobalContext();
   
@@ -60,12 +61,12 @@ const Content3: React.FC = () => {
 
   // Update local data when global data changes
   useEffect(() => {
-    setLocalData(globalMovies); // Assuming 'movie' is now 'globalMovies' from context
+    setLocalData(globalMovies);
   }, [globalMovies]);
 
   // Sort movies by vote_average in descending order
-  const topMovies = [...localData]
-    .sort((a, b) => b.vote_average - a.vote_average)
+  const fanFav = [...localData]
+    .sort((a, b) => b.popularity - a.popularity)
     .slice(0, 5);
 
   return (
@@ -73,7 +74,7 @@ const Content3: React.FC = () => {
       <div className="wrapper">
         <div className="my-4 p-4">
           <h2 className="text-white flex items-center gap-2 font-extrabold text-xl">
-            <span className="text-yellow-500 font-extrabold text-xl">|</span>Top 5 on IMDb this week
+            <span className="text-yellow-500 font-extrabold text-xl">|</span>Fan favorites
             <Link href="/">
               <span>
                 <IoIosArrowForward color="white" fontSize="1.5rem" />
@@ -85,8 +86,8 @@ const Content3: React.FC = () => {
               {/* Render the carousel groups */}
               <div className="bg-black flex">
                 {/* Render the top 5 movie data */}
-                {topMovies.map((movie) => (
-                    
+                {fanFav.map((movie) => (
+                     
                   <div key={movie.id} className="carousel-item relative flex flex-col items-center p-4 w-2/5">
                     <Image
                       src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -119,8 +120,7 @@ const Content3: React.FC = () => {
                       </Link>
                     </div>
                   </div>
-                  
-                  ))}
+                   ))}
                   </div>
             </Carousel>
           </div>
@@ -130,4 +130,4 @@ const Content3: React.FC = () => {
   );
 };
 
-export default Content3;
+export default Content4;
