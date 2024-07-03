@@ -19,12 +19,12 @@ interface Movie {
   vote_average: number;
   vote_count: number;
   popularity:number;
+  movieId:number;
 }
 
 const Content4: React.FC = () => {
   const { data, fetchMovies } = useGlobalContext();
-  const { movie: globalMovies } = useGlobalContext();
-  
+  const { movie: globalMovies, addToWatchlist } = useGlobalContext();
   const [localData, setLocalData] = useState<Movie[]>([]);
   const [ratedMovies, setRatedMovies] = useState<number[]>([]);
 
@@ -36,6 +36,7 @@ const Content4: React.FC = () => {
       return;
     }
 
+    addToWatchlist(movieId);
     // Add movieId to the ratedMovies array
     setRatedMovies((prevRatedMovies) => [...prevRatedMovies, movieId]);
 
@@ -97,7 +98,7 @@ const Content4: React.FC = () => {
                       height={300}
                       className="w-48 h-64"
                     />
-                    <Link href="/watchlist"><CiBookmarkPlus className="absolute left-2 top-2.5" color="white" fontSize="2.5em" /></Link>
+                    <CiBookmarkPlus onClick={() => addToWatchlist(movie)} className="absolute left-2 top-2.5" color="white" fontSize="2.5em" />
                     <div className="flex flex-col w-full bg-slate-900">
                       <div className="flex justify-between">
                         <div className="flex items-center gap-2">

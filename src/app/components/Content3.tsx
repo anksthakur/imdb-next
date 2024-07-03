@@ -22,18 +22,20 @@ interface Movie {
 
 const Content3: React.FC = () => {
   const { data, fetchMovies } = useGlobalContext();
-  const { movie: globalMovies } = useGlobalContext();
-  
+  const { movie: globalMovies, addToWatchlist } = useGlobalContext(); 
   const [localData, setLocalData] = useState<Movie[]>([]);
   const [ratedMovies, setRatedMovies] = useState<number[]>([]);
 
-  // Function to handle movie rating
+  // Function to handle movie rating and add to watchlist
   const handleRating = (rate: number, movieId: number) => {
     // Prevent duplicate ratings
     if (ratedMovies.includes(movieId)) {
       alert("You have already rated this movie.");
       return;
     }
+
+    // Call addToWatchlist function to add movie to watchlist
+    addToWatchlist(movieId);
 
     // Add movieId to the ratedMovies array
     setRatedMovies((prevRatedMovies) => [...prevRatedMovies, movieId]);
@@ -96,7 +98,7 @@ const Content3: React.FC = () => {
                       height={300}
                       className="w-48 h-64"
                     />
-                    <Link href="/watchlist"><CiBookmarkPlus className="absolute left-2 top-2.5" color="white" fontSize="2.5em" /></Link>
+                   <CiBookmarkPlus onClick={() => addToWatchlist(movie)} className="absolute left-2 top-2.5" color="white" fontSize="2.5em" />
                     <div className="flex flex-col w-full bg-slate-900">
                       <div className="flex justify-between">
                         <div className="flex items-center gap-2">

@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
@@ -11,9 +11,11 @@ import { TfiWorld } from "react-icons/tfi";
 import { FaAward } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import Link from "next/link";
+import { useGlobalContext } from '../Context/store';
 
 const Navbar: React.FC = () => {
   const [fabar, setFabar] = useState(false);
+  const { watchlist } = useGlobalContext();
 
   const hideDiv = () => {
     setFabar(!fabar);
@@ -69,7 +71,12 @@ const Navbar: React.FC = () => {
                 <BiSolidAddToQueue color="white" fontSize="1.5em" />
               </span>
               <Link href="/watchlist">
-                <button className="text-cyan-50 pl-2">Watchlist<span className=" ml-1 px-1 bg-yellow-500 rounded-xl text-black">0</span></button>
+                <button className="text-cyan-50 pl-2">
+                  Watchlist
+                  <span className="ml-1 px-1 bg-yellow-500 rounded-xl text-black">
+                    {watchlist.length}
+                  </span>
+                </button>
               </Link>
             </div>
             <div>
@@ -114,7 +121,7 @@ const Navbar: React.FC = () => {
                   <MdLocalMovies fontSize="1.5em" color="yellow" />
                   Movies
                 </h1>
-                <h2>Release Calender</h2>
+                <h2>Release Calendar</h2>
                 <Link href="/topmovies">
                   <h2>Top 250 Movies</h2>
                 </Link>
@@ -122,7 +129,7 @@ const Navbar: React.FC = () => {
                   <h2>Most Popular Movies</h2>
                 </Link>
                 <h2>Movies News</h2>
-                <h2>ShowTimes & Tickets</h2>
+                <h2>Showtimes & Tickets</h2>
                 <h2>India Movie Spotlight</h2>
               </div>
               <div className="leading-8 text-white">
@@ -130,7 +137,7 @@ const Navbar: React.FC = () => {
                   <PiTelevisionBold fontSize="1.5em" color="yellow" />
                   TV Shows
                 </h1>
-                <h2>What is on TV & Streaming</h2>
+                <h2>Whats on TV & Streaming</h2>
                 <Link href="/topshows">
                   {" "}
                   <h2>Top 250 TV Shows</h2>
@@ -156,7 +163,7 @@ const Navbar: React.FC = () => {
               <div className="leading-8 text-white">
                 <h1 className="flex gap-2 items-center font-bold text-xl">
                   <FaAward fontSize="1.5em" color="yellow" />
-                  Awards & Event
+                  Awards & Events
                 </h1>
                 <h2>Oscars</h2>
                 <h2>Pride</h2>

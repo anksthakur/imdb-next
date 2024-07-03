@@ -11,7 +11,7 @@ import { MdReadMore } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
 import { CiBookmarkPlus } from "react-icons/ci";
 
-// Define the Movie interface for better type safety
+
 interface Movie {
   id: number;
   title: string;
@@ -21,8 +21,7 @@ interface Movie {
 }
 
 const MovieComponent: React.FC = () => {
- 
-  const { data, fetchMovies } = useGlobalContext();
+  const { data, fetchMovies, addToWatchlist } = useGlobalContext();
   const [localData, setLocalData] = useState<Movie[]>([]);
   const [ratedMovies, setRatedMovies] = useState<number[]>([]);
 
@@ -95,7 +94,9 @@ const MovieComponent: React.FC = () => {
                       height={300}
                       className="w-48 h-64"
                     />
-                    <Link href="/watchlist"><CiBookmarkPlus className="absolute left-2 top-2.5" color="white" fontSize="2.5em" /></Link>
+                   
+                      <CiBookmarkPlus onClick={() => addToWatchlist(movie)} className="absolute left-2 top-2.5" color="white" fontSize="2.5em" />
+                    
                     <div className="flex flex-col w-full bg-slate-900">
                       <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2">
