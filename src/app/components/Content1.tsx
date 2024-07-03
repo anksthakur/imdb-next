@@ -8,6 +8,8 @@ import { MdNavigateNext } from "react-icons/md";
 import Link from "next/link";
 import { IoPlayCircleOutline } from "react-icons/io5";
 import { CiBookmarkPlus } from "react-icons/ci";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const API_KEY: string = process.env.NEXT_PUBLIC_API_KEY || "";
 
@@ -19,7 +21,8 @@ interface Movie {
 
 const Content1: React.FC = () => {
   const [data, setData] = useState<Movie[]>([]);
-  const [isError, setIsError] = useState<string | undefined>("");
+  const [isError, setIsError] = useState<string | undefined>(undefined);
+  const [watchlist, setWatchlist] = useState<Movie[]>([]);
 
   useEffect(() => {
     const getApiData = async () => {
@@ -27,7 +30,6 @@ const Content1: React.FC = () => {
         const res = await axios.get<{ results: Movie[] }>(
           `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}`
         );
-        console.log("data", res.data.results);
         setData(res.data.results);
       } catch (error: any) {
         setIsError(error.message);
@@ -37,8 +39,27 @@ const Content1: React.FC = () => {
     getApiData();
   }, []);
 
+  // add to watchlist
+  const addToWatchlist = (movie: Movie) => {
+    const existingWatchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
+
+    const existingMovieIndex = existingWatchlist.findIndex((item: Movie) => item.id === movie.id);
+
+    // toastify
+    if (existingMovieIndex !== -1) {
+      toast.warning("Movie already added to the watchlist", { position: "top-center", theme: "colored" });
+    } else {
+      existingWatchlist.push(movie);
+      localStorage.setItem("watchlist", JSON.stringify(existingWatchlist));
+      setWatchlist(existingWatchlist);
+      console.log("movie added",existingWatchlist)
+      toast.success("Movie added to watchlist", { position: "top-center", theme: "colored" });
+    }
+  };
+
   return (
     <div className="wrapper">
+      <ToastContainer />
       <div className="flex gap-7 py-2">
         {isError && <p>{isError}</p>}
         {data.length > 0 && (
@@ -58,9 +79,9 @@ const Content1: React.FC = () => {
                   height={700}
                 />
                 <div className="p-4 flex items-center absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-t from-black to-transparent w-full">
-                  <Link href="/watchlist">
+                  <button onClick={() => addToWatchlist(movie)}>
                     <CiBookmarkPlus color="white" fontSize="2.5em" />
-                  </Link>
+                  </button>
                   <Link href="/">
                     <IoPlayCircleOutline color="white" fontSize="2.5em" />
                   </Link>
@@ -81,13 +102,11 @@ const Content1: React.FC = () => {
                 src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 width={200}
                 height={100}
-                alt="IMDB Logo"
+                alt={movie.title}
               />
-              {/* Play icon */}
               <Link href="/">
                 <IoPlayCircleOutline color="white" fontSize="2.5em" />
               </Link>
-
               <div className="text-white">{movie.title}</div>
             </div>
           ))}

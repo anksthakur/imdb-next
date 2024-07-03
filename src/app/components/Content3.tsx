@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FaStar, FaPlay } from "react-icons/fa";
 import { MdReadMore } from "react-icons/md";
 import { Rating } from "react-simple-star-rating";
+import { CiBookmarkPlus } from "react-icons/ci";
 
 // Define the Movie interface for better type safety
 interface Movie {
@@ -95,6 +96,7 @@ const Content3: React.FC = () => {
                       height={300}
                       className="w-48 h-64"
                     />
+                    <Link href="/watchlist"><CiBookmarkPlus className="absolute left-2 top-2.5" color="white" fontSize="2.5em" /></Link>
                     <div className="flex flex-col w-full bg-slate-900">
                       <div className="flex justify-between">
                         <div className="flex items-center gap-2">
@@ -102,7 +104,7 @@ const Content3: React.FC = () => {
                           <span className="text-white">{movie.vote_average.toFixed(1)}</span>
                         </div>
                         <div className="flex items-center ml-2">
-                          <Rating onClick={(rate: number) => handleRating(rate, movie.id)} initialValue={0} iconsCount={1} />
+                          <Rating onClick={(rate: number) => handleRating(rate, movie.id)} size={27} initialValue={0} iconsCount={1} />
                           <span className="text-white">{movie.vote_count}</span>
                         </div>
                       </div>

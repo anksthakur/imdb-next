@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FaStar, FaPlay } from "react-icons/fa";
 import { MdReadMore } from "react-icons/md"; 
 import { Rating } from "react-simple-star-rating";
+import { CiBookmarkPlus } from "react-icons/ci";
 
 // Define the Movie interface for better type safety
 interface Movie {
@@ -86,7 +87,7 @@ const MovieComponent: React.FC = () => {
               <div className="bg-black flex" key={`carousel-group-${i}`}>
                 {/* Render the repeated movie data */}
                 {repeatedData.map((movie, index) => (
-                  <div key={`${movie.id}-${i}-${index}`} className="carousel-item relative flex flex-col items-center p-4 w-2/5">
+                  <div key={`${movie.id}-${i}-${index}`} className="carousel-item relative flex flex-col items-center p-4 w-2/5 ">
                     <Image
                       src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                       alt={movie.title}
@@ -94,14 +95,15 @@ const MovieComponent: React.FC = () => {
                       height={300}
                       className="w-48 h-64"
                     />
+                    <Link href="/watchlist"><CiBookmarkPlus className="absolute left-2 top-2.5" color="white" fontSize="2.5em" /></Link>
                     <div className="flex flex-col w-full bg-slate-900">
-                      <div className="flex justify-between">
+                      <div className="flex justify-between items-center">
                         <div className="flex items-center gap-2">
                           <FaStar color="yellow" fontSize="1.5rem" />
                           <span className="text-white">{movie.vote_average.toFixed(1)}</span>
                         </div>
                         <div className="flex items-center ml-2">
-                          <Rating onClick={(rate: number) => handleRating(rate, movie.id)} initialValue={0} iconsCount={1} />
+                          <Rating onClick={(rate: number) => handleRating(rate, movie.id)} initialValue={0} iconsCount={1} size={27}/>
                           <span className="text-white">{movie.vote_count}</span>
                         </div>
                       </div>

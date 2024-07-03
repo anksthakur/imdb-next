@@ -69,7 +69,7 @@ const Navbar: React.FC = () => {
                 <BiSolidAddToQueue color="white" fontSize="1.5em" />
               </span>
               <Link href="/watchlist">
-                <button className="text-cyan-50 pl-2">Watchlist</button>
+                <button className="text-cyan-50 pl-2">Watchlist<span className=" ml-1 px-1 bg-yellow-500 rounded-xl text-black">0</span></button>
               </Link>
             </div>
             <div>
