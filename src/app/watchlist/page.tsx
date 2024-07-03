@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { CiBookmarkPlus } from "react-icons/ci";
 import { Rating } from 'react-simple-star-rating';
 import { FaStar } from 'react-icons/fa';
+import { IoInformationCircleOutline } from "react-icons/io5";
 
 interface Movie {
   id: number;
@@ -86,7 +87,8 @@ const Page = () => {
           <div className='border border-gray-500 py-2 px-2 mt-3'>
             {watchlist.length > 0 ? (
               watchlist.map((movie) => (
-                <div key={movie.id} className='flex items-center gap-3 border border-gray-400 border-t-0 border-l-0 border-r-0 py-2'>
+                <div key={movie.id} className='flex items-center gap-3 border border-gray-400 border-t-0 border-l-0 border-r-0 py-2 justify-between'>
+                  <div className='flex justify-start items-center gap-3'>
                   <div className='relative'>
                     <Image
                       src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
@@ -103,14 +105,17 @@ const Page = () => {
                   <div>
                     <h1>{movie.title}</h1>
                   </div>
-                    <div className="flex items-center gap-2">
-                      <FaStar color="yellow" fontSize="1.5rem" />
-                      <span>{movie.vote_average.toFixed(1)}</span>
-                      <Rating onClick={(rate: number) => handleRating(rate, movie.id)} size={27} initialValue={0} iconsCount={1} />
-                      <span>{movie.vote_count}</span>
+                    <div className="flex items-center justify-between">
+                      <div className='flex gap-1'><FaStar color="yellow" fontSize="1.5rem" />
+                      <span>{movie.vote_average.toFixed(1)}</span></div>
+                     <div className='gap-1'> <Rating onClick={(rate: number) => handleRating(rate, movie.id)} size={27} initialValue={0} iconsCount={1} />
+                     <span>{movie.vote_count}</span></div>
                     </div>
                   </div>
+                  </div>
+                  <div className='  '><IoInformationCircleOutline color='blue' fontSize="1.5rem" /></div>
                 </div>
+                
               ))
             ) : (
               <p>{isError}</p>
