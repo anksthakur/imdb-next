@@ -9,6 +9,7 @@ type DataType = {
   vote_count: number;
   vote_average: number;
   popularity: number;
+  movieId:number;
 };
 
 type Movie = {

@@ -82,7 +82,7 @@ const MovieComponent: React.FC = () => {
         <div className="flex justify-between">
           <Carousel showArrows={true} showThumbs={false} showIndicators={false} className="w-full">
             {/* Render the carousel groups */}
-            {[...Array(20)].map((_, i) => (
+            {[...Array(5)].map((_, i) => (
               <div className="bg-black flex" key={`carousel-group-${i}`}>
                 {/* Render the repeated movie data */}
                 {repeatedData.map((movie, index) => (
