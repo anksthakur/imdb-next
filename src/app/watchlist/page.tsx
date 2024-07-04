@@ -75,6 +75,31 @@ const Page = () => {
     }
   }, []);
 
+  const handleSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const sortBy = e.target.value;
+    let sortedWatchlist = [...watchlist];
+
+    switch (sortBy) {
+      case 'List order':
+        // Keep the original order
+        break;
+      case 'Number of ratings':
+        sortedWatchlist.sort((a, b) => b.vote_count - a.vote_count);
+        break;
+      case 'Vote average':
+        sortedWatchlist.sort((a, b) => b.vote_average - a.vote_average);
+        break;
+      case 'Popularity':
+        // Assuming popularity is determined by vote_count * vote_average
+        sortedWatchlist.sort((a, b) => (b.vote_count * b.vote_average) - (a.vote_count * a.vote_average));
+        break;
+      default:
+        break;
+    }
+
+    setWatchlist(sortedWatchlist);
+  };
+
   return (
     <div className='bg-white py-5'>
       <div className='wrapper'>
@@ -87,11 +112,11 @@ const Page = () => {
               <BsFilterCircleFill fontSize="1.5rem" color='blue' />
               Sort by
             </h1>
-            <select className='text-blue-600 w-24'>
-              <option className='text-black'>List order</option>
-              <option className='text-black'>Number of ratings</option>
-              <option className='text-black'>Number of Votes</option>
-              <option className='text-black'>Popularity</option>
+            <select className='text-blue-600 w-24' onChange={handleSort}>
+              <option className='text-black' value='List order'>List order</option>
+              <option className='text-black' value='Number of ratings'>Number of ratings</option>
+              <option className='text-black' value='Vote average'>Vote average</option>
+              <option className='text-black' value='Popularity'>Popularity</option>
             </select>
             <FcViewDetails color='white' fontSize="1.5rem" />
             <RiLayoutGrid2Fill fontSize="1.5rem" />
