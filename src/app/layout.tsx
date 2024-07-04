@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import { GlobalContextProvider } from "./Context/store";
+import SessionProvider from "../../HOC/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,9 +23,11 @@ export default function RootLayout({
     <html className="bg-black">
       <body className={inter.className}>
         <GlobalContextProvider>
+          <SessionProvider>
           <Navbar />
           {children}
           <Footer />
+          </SessionProvider>
         </GlobalContextProvider>
       </body>
     </html>

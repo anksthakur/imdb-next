@@ -1,6 +1,6 @@
-export {default} from "next-auth/middleware"
 
-// kis route pe next auth kaam kre 
+export { default } from "next-auth/middleware";
+
 export const config = {
-    matcher: ["/signin"]
-}
+  matcher: ["/watchlist"],
+};

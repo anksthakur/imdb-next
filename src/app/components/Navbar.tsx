@@ -1,4 +1,5 @@
-"use client"
+
+"use client";
 import Image from "next/image";
 import React, { useState } from "react";
 import { FaBars } from "react-icons/fa";
@@ -12,6 +13,8 @@ import { FaAward } from "react-icons/fa6";
 import { IoIosPeople } from "react-icons/io";
 import Link from "next/link";
 import { useGlobalContext } from '../Context/store';
+import { signOut } from "next-auth/react";
+
 
 const Navbar: React.FC = () => {
   const [fabar, setFabar] = useState(false);
@@ -21,6 +24,11 @@ const Navbar: React.FC = () => {
     setFabar(!fabar);
   };
 
+  const handleLogout = async () => {
+    await signOut();
+    // Redirect to homepage or another page
+     window.location.href = "/";
+  };
   return (
     <>
       <div className="bg-black py-2">
@@ -28,18 +36,10 @@ const Navbar: React.FC = () => {
           <div className="flex justify-between items-center">
             <div>
               <Link href="/">
-                <Image
-                  src="/imdb.png"
-                  width={60}
-                  height={25}
-                  alt="imdb image"
-                />
+                <Image src="/imdb.png" width={60} height={25} alt="imdb image" />
               </Link>
             </div>
-            <div
-              onClick={hideDiv}
-              className="flex justify-center cursor-pointer"
-            >
+            <div onClick={hideDiv} className="flex justify-center cursor-pointer">
               <FaBars color="white" fontSize="1.5em" />
               <span className="text-cyan-50 pl-2">Menu</span>
             </div>
@@ -50,11 +50,7 @@ const Navbar: React.FC = () => {
                 <option>Celebs</option>
                 <option>Companies</option>
               </select>
-              <input
-                className="w-96 outline-none"
-                type="search"
-                placeholder="search IMDb"
-              />
+              <input className="w-96 outline-none" type="search" placeholder="search IMDb" />
               <span className="bg-white ">
                 <CiSearch color="black" fontSize="1.5em" />
               </span>
@@ -81,8 +77,9 @@ const Navbar: React.FC = () => {
             </div>
             <div>
               <Link href="/signin">
-                <button className="text-cyan-50">Sign In</button>
+                <button className="text-cyan-50 hover:text-yellow-500">Login</button>
               </Link>
+              <button onClick={handleLogout} className="text-white p-2 hover:text-yellow-500">Logout</button>
             </div>
             <div>
               <select className="w-10">
@@ -95,20 +92,12 @@ const Navbar: React.FC = () => {
         </div>
       </div>
       {fabar && (
-        <div
-          id="hide"
-          className="absolute w-full top-0 bg-black min-h-full z-10"
-        >
+        <div id="hide" className="absolute w-full top-0 bg-black min-h-full z-10">
           <div className="wrapper">
             <div className="flex justify-between">
               <div>
                 <Link href="/">
-                  <Image
-                    src="/imdb.png"
-                    width={80}
-                    height={30}
-                    alt="imdb image"
-                  />
+                  <Image src="/imdb.png" width={80} height={30} alt="imdb image" />
                 </Link>
               </div>
               <div onClick={hideDiv} className="cursor-pointer">
@@ -139,11 +128,9 @@ const Navbar: React.FC = () => {
                 </h1>
                 <h2>Whats on TV & Streaming</h2>
                 <Link href="/topshows">
-                  {" "}
                   <h2>Top 250 TV Shows</h2>
                 </Link>
                 <Link href="/popularshows">
-                  {" "}
                   <h2>Most Popular TV Shows</h2>
                 </Link>
                 <h2>TV News</h2>
