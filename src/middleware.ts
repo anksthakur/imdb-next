@@ -10,5 +10,5 @@ export function middleware(request: NextRequest) {
  
 // See "Matching Paths" 
 export const config = {
-  matcher: '/watchlist',
+  matcher: '/about',
 }

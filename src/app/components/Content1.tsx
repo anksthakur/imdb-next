@@ -71,6 +71,7 @@ const Content1: React.FC = () => {
           >
             {data.map((movie) => (
               <div key={movie.id} className="carousel-item relative">
+                
                 <Image
                   style={{ height: "472px" }}
                   src={`https://image.tmdb.org/t/p/w400${movie.poster_path}`}
@@ -78,6 +79,7 @@ const Content1: React.FC = () => {
                   width={400}
                   height={700}
                 />
+                
                 <div className="p-4 flex items-center absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-gradient-to-t from-black to-transparent w-full">
                   <button onClick={() => addToWatchlist(movie)}>
                     <CiBookmarkPlus color="white" fontSize="2.5em" />
@@ -85,9 +87,11 @@ const Content1: React.FC = () => {
                   <Link href="/">
                     <IoPlayCircleOutline color="white" fontSize="2.5em" />
                   </Link>
+                  <Link href={`/movie/${movie.id}`}>
                   <h2 className="text-lg font-bold text-white ml-2">
                     {movie.title}
                   </h2>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -125,3 +129,4 @@ const Content1: React.FC = () => {
 };
 
 export default Content1;
+//

@@ -108,7 +108,9 @@ const MovieComponent: React.FC = () => {
                           <span className="text-white">{movie.vote_count}</span>
                         </div>
                       </div>
+                      <Link href={`/movie/${movie.id}`}>
                       <h2 className="text-lg font-bold text-white">{movie.title}</h2>
+                      </Link>
                       <button className="bg-slate-800 text-blue-700 font-bold px-4 py-2 rounded-md mt-2 w-full md:w-auto">Watch options</button>
                       <Link href="/">
                         <div className="flex justify-between items-center mt-2">

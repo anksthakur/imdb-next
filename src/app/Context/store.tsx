@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { createContext, useContext, Dispatch, SetStateAction, useState, useEffect, ReactNode } from "react";
 import axios from 'axios';
 
@@ -9,7 +9,6 @@ type DataType = {
   vote_count: number;
   vote_average: number;
   popularity: number;
-  movieId:number;
 };
 
 type Movie = {
@@ -33,15 +32,15 @@ interface ContextProps {
 
 const GlobalContext = createContext<ContextProps>({
   id: "",
-  setId: (): void => {},
+  setId: () => {},
   movie: [],
-  setMovie: (): void => {},
+  setMovie: () => {},
   data: [],
-  setData: (): void => {},
+  setData: () => {},
   fetchMovies: async () => {},
   watchlist: [],
-  addToWatchlist: (): void => {},
-  removeFromWatchlist: (): void => {},
+  addToWatchlist: () => {},
+  removeFromWatchlist: () => {},
 });
 
 const API_KEY: string = process.env.NEXT_PUBLIC_API_KEY || "";
@@ -67,9 +66,6 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
       });
       setMovie(response.data.results);
       setData(response.data.results);
-      console.log("Movie data",response.data.results);
-      console.log("data",response.data.results);
-      
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
@@ -77,13 +73,12 @@ export const GlobalContextProvider = ({ children }: { children: ReactNode }) => 
 
   useEffect(() => {
     fetchMovies();
-  }, []); 
+  }, []);
 
   const addToWatchlist = (movie: Movie) => {
     setWatchlist((prevWatchlist) => {
       const updatedWatchlist = [...prevWatchlist, movie];
       localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
-
       return updatedWatchlist;
     });
   };
