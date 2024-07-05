@@ -8,7 +8,7 @@ export function middleware(request: NextRequest) {
   
 }
  
-// See "Matching Paths" below to learn more
+// See "Matching Paths" 
 export const config = {
   matcher: '/watchlist',
 }

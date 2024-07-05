@@ -15,22 +15,29 @@ import { useGlobalContext } from '../Context/store';
 import { signOut } from "next-auth/react";
 
 const Navbar: React.FC = () => {
+  // State to manage the visibility of the menu
   const [fabar, setFabar] = useState(false);
+  // State to manage the search query input
   const [searchQuery, setSearchQuery] = useState("");
+  // Context to get the watchlist and movie data
   const { watchlist, movie } = useGlobalContext();
 
+  // Toggle the menu visibility
   const hideDiv = () => {
     setFabar(!fabar);
   };
 
+  // Handle user logout
   const handleLogout = async () => {
     await signOut({ callbackUrl: "/" });
   };
 
+  // Update the search query state as the user types
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
   };
 
+  // Filter movies based on the search query
   const filteredMovies = movie.filter((m) =>
     m.title.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -41,14 +48,17 @@ const Navbar: React.FC = () => {
         <div className="wrapper">
           <div className="flex justify-between items-center">
             <div>
+              {/* Logo Link */}
               <Link href="/">
                 <Image src="/imdb.png" width={60} height={25} alt="imdb image" />
               </Link>
             </div>
+            {/* Menu Toggle */}
             <div onClick={hideDiv} className="flex justify-center cursor-pointer">
               <FaBars color="white" fontSize="1.5em" />
               <span className="text-cyan-50 pl-2">Menu</span>
             </div>
+            {/* Search Bar */}
             <div className="flex justify-center rounded border border-red-200">
               <select className="w-10 outline-none">
                 <option>All</option>
@@ -67,6 +77,7 @@ const Navbar: React.FC = () => {
                 <CiSearch color="black" fontSize="1.5em" />
               </span>
             </div>
+            {/* IMDb Pro Link */}
             <div>
               <Link href="/imdbpro">
                 <button className="text-white">
@@ -74,6 +85,7 @@ const Navbar: React.FC = () => {
                 </button>
               </Link>
             </div>
+            {/* Watchlist */}
             <div className="flex justify-between">
               <span>
                 <BiSolidAddToQueue color="white" fontSize="1.5em" />
@@ -87,12 +99,14 @@ const Navbar: React.FC = () => {
                 </button>
               </Link>
             </div>
+            {/* Login and Logout Buttons */}
             <div>
               <Link href="/signin">
                 <button className="text-cyan-50 hover:text-yellow-500">Login</button>
               </Link>
               <button onClick={handleLogout} className="text-white p-2 hover:text-yellow-500">Logout</button>
             </div>
+            {/* Language Selection */}
             <div>
               <select className="w-10">
                 <option>Eng</option>
@@ -103,6 +117,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* Menu Overlay */}
       {fabar && (
         <div id="hide" className="absolute w-full top-0 bg-black min-h-full z-10">
           <div className="wrapper">
@@ -116,6 +131,7 @@ const Navbar: React.FC = () => {
                 <IoMdCloseCircle color="yellow" fontSize="2.2em" />
               </div>
             </div>
+            {/* Menu Links */}
             <div className="flex justify-between mt-5">
               <div className="leading-8 text-white">
                 <h1 className="flex gap-2 items-center font-bold text-xl">
@@ -184,6 +200,7 @@ const Navbar: React.FC = () => {
           </div>
         </div>
       )}
+      {/* Search Results */}
       {searchQuery && (
         <div className="bg-white p-4 absolute w-full top-12 z-20">
           {filteredMovies.map((movie) => (
