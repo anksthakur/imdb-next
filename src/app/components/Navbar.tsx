@@ -1,4 +1,3 @@
-
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
@@ -15,20 +14,27 @@ import Link from "next/link";
 import { useGlobalContext } from '../Context/store';
 import { signOut } from "next-auth/react";
 
-
 const Navbar: React.FC = () => {
   const [fabar, setFabar] = useState(false);
-  const { watchlist } = useGlobalContext();
+  const [searchQuery, setSearchQuery] = useState("");
+  const { watchlist, movie } = useGlobalContext();
 
   const hideDiv = () => {
     setFabar(!fabar);
   };
 
   const handleLogout = async () => {
-    await signOut();
-    // Redirect to homepage or another page
-     window.location.href = "/";
+    await signOut({ callbackUrl: "/" });
   };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredMovies = movie.filter((m) =>
+    m.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <>
       <div className="bg-black py-2">
@@ -50,7 +56,13 @@ const Navbar: React.FC = () => {
                 <option>Celebs</option>
                 <option>Companies</option>
               </select>
-              <input className="w-96 outline-none" type="search" placeholder="search IMDb" />
+              <input
+                className="w-96 outline-none"
+                type="search"
+                placeholder="Search IMDb"
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
               <span className="bg-white ">
                 <CiSearch color="black" fontSize="1.5em" />
               </span>
@@ -170,6 +182,21 @@ const Navbar: React.FC = () => {
               </div>
             </div>
           </div>
+        </div>
+      )}
+      {searchQuery && (
+        <div className="bg-white p-4 absolute w-full top-12 z-20">
+          {filteredMovies.map((movie) => (
+            <div key={movie.id} className="flex items-center p-2 border-b border-gray-200">
+              <Image
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+                width={50}
+                height={75}
+              />
+              <span className="ml-4">{movie.title}</span>
+            </div>
+          ))}
         </div>
       )}
     </>
